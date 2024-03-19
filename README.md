@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>casar comigo?</title>
+</head>
+<body>
+<div id="conteudo">
+<h2>Aceita casar comigo?</h2>
+<div style="margin: auto;width: 170px;">
+<button style="position: fixed;display: block;" class="btn" onclick="sim()">SIM</button>
+<button class="btn" onclick="desvia(this)" onmouseover="desvia(this)" style="position: absolute;">NÃO</button>
+</div>
+</div>
+<button id="baixarArquivo" onclick="baixarArquivo()" style="color: white;font-size: 17px;background: #08f;padding: 12px;position: fixed;bottom: 0;right: 0;width: 100%;border: 1px solid white;">Baixe
+o arquivo clicando aqui</button>
+<style>
+    #conteudo {
+        background: #ff0000;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 10px;
+        text-align: center;
+        font-family: sans-serif;
+    }
+
+    .btn {
+        background: black;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 80px;
+        border-radius: 5px;
+    }
+
+    .hbtn {
+        opacity: 0;
+    }
+</style>
+<script>
+    function sim() {
+        alert("Você aceitou casar comigo! :)");
+        // redireciona para um URL após clicar no SIM
+        location.href = "https://music.youtube.com/watch?v=izGwDsrQ1eQ";
+    }
+
+    function desvia(btn) {
+        btn.style.position = 'absolute';
+        btn.style.bottom = geraPosicao(10, 90);
+        btn.style.left = geraPosicao(10, 90);
+        console.log('opa, desviei...');
+    }
+
+    function geraPosicao(min, max) {
+        return (Math.random() * (max - min) + min) + "%";
+    }
+
+
+    /* Este código e o botão para baixar arquivo não vão na versão que você baicar */
+    function baixarArquivo() {
+        /* link do código original no GitHub */
+        fetch("https://raw.githubusercontent.com/MTHS1901/pedido-de-namoro-irrecusavel/main/index.html", {
+            "headers": {
+                "accept": "text/html"
+            },
+            "method": "GET",
+        }).then(function (response) {
+            if (!response.ok) {
+                throw new Error('Falha no download!');
+            }
+            return response.text();
+        }).then(function (data) {
+            const blob = new Blob([data], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = prompt("Insira um nome para o arquivo para baixar") + ".html";
+            link.click();
+            URL.revokeObjectURL(url);
+        })
+    }
+
+</script></body></html>
